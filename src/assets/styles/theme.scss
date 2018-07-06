@@ -1,5 +1,11 @@
 @charset 'UTF-8';
 
+// Bootstrap Overrides
+
+
+// Bootstrap Styles
+@import 'core/bootstrap';
+
 /**
  * [replace with theme name] | Built with Slate
  */
@@ -13,19 +19,13 @@
 @import './tools/functions';
 
 // Core
-@import './core/forms';
 @import './core/helpers';
 @import './core/layout';
-@import './core/media';
 @import './core/responsive-tables';
 @import './core/rte';
 @import './core/typography';
 
 // Components
-@import './components/buttons';
-@import './components/hero-banner';
-@import './components/icons';
-@import './components/placeholders';
 @import './components/responsive-images';
 
 // Sections

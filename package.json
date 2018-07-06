@@ -17,7 +17,12 @@
   "devDependencies": {
     "@shopify/slate-tools": ">=1.0.0-beta.5",
     "babel-preset-shopify": "^16.2.0",
+    "css-loader": "^1.0.0",
     "eslint-plugin-shopify": "^19.0.0",
+    "node-sass": "^4.9.1",
+    "postcss-loader": "^2.1.5",
+    "sass-loader": "^7.0.3",
+    "style-loader": "^0.21.0",
     "stylelint-config-prettier": "^3.0.4",
     "stylelint-config-shopify": "^5.0.0"
   },
@@ -29,10 +34,12 @@
     "@shopify/theme-rte": "^1.0.0-alpha.3",
     "@shopify/theme-sections": "^1.0.0-alpha.4",
     "@shopify/theme-variants": "^1.0.0-alpha.5",
-    "jquery": "^3.2.1",
+    "bootstrap": "^4.1.1",
+    "jquery": "^3.3.1",
     "lazysizes": "^4.0.2",
     "lodash-es": "^4.17.4",
-    "normalize.css": "^7.0.0"
+    "normalize.css": "^7.0.0",
+    "popper.js": "^1.14.3"
   },
   "scripts": {
     "start": "slate-tools start",

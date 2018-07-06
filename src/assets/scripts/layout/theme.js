@@ -13,6 +13,10 @@ import {pageLinkFocus} from '@shopify/theme-a11y';
 import {cookiesEnabled} from '@shopify/theme-cart';
 import {wrapTable, wrapIframe} from '@shopify/theme-rte';
 
+// Bootstrap JS
+import 'bootstrap/js/src/util'; //util.js is a dependency for all other BootstrapJS
+import { Modal } from '../vendor/bootstrap/bootstrap';
+
 window.slate = window.slate || {};
 window.theme = window.theme || {};
 

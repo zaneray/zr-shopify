@@ -1,6 +1,3 @@
-// Enable Bootstrap JS here only as needed globally in the project. Otherwise, import non-global Bootstrap JS
-// in specific modules only
-
 import Alert from 'bootstrap/js/src/alert'
 import Button from 'bootstrap/js/src/button'
 import Carousel from 'bootstrap/js/src/carousel'

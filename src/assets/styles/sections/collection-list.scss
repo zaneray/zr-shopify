@@ -1,7 +1,5 @@
 .collection-list {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: $grid-max-width;
+
 }
 
 .collection-list-item {
@@ -10,10 +8,10 @@
   text-align: center;
 }
 
-.collection-list__image {
+.collection-list-image {
   min-width: 320px;
 }
 
-.collection-list__title {
+.collection-list-title {
   flex-basis: 100%;
 }

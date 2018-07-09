@@ -25,7 +25,7 @@ $(document).ready(() => {
     pageLinkFocus($(window.location.hash));
   }
 
-  $('.in-page-link').on('click', (evt) => {
+  $('.js-in-page-link').on('click', (evt) => {
     pageLinkFocus($(evt.currentTarget.hash));
   });
 

@@ -8,13 +8,19 @@ import 'lazysizes/plugins/respimg/ls.respimg';
 import '../../styles/theme.scss';
 import '../../styles/theme.scss.liquid';
 
-import $ from 'jquery';
 import {pageLinkFocus} from '@shopify/theme-a11y';
 import {cookiesEnabled} from '@shopify/theme-cart';
 import {wrapTable, wrapIframe} from '@shopify/theme-rte';
 
+// Bootstrap JS is dependent on both Jquery and Popper
+import $ from 'jquery';
+import 'popper.js/dist/popper';
+
 // Bootstrap JS - Global UI components
 import { Modal } from '../vendor/bootstrap/bootstrap';
+
+// Third party scripts
+import '../vendor/scrollToId/scrollToId';
 
 window.slate = window.slate || {};
 window.theme = window.theme || {};
@@ -54,4 +60,7 @@ $(document).ready(() => {
       'supports-cookies',
     );
   }
+
+  // Initializing global ScrollToId
+  $('.js-scrolltoid').scrollToID();
 });

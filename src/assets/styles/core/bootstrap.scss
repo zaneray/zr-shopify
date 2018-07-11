@@ -1,10 +1,9 @@
-// NOTE: The bootstrap-override import needs to come before the actual bootstrap vendor imports
-@import "./bootstrap-override/bootstrap-override";
-
-
 // NOTE: Dynamic imports in SCSS is not a thing. It's "In Progess"
 // Track https://github.com/sass/sass/issues/739 for status
 // $bootstrap-path: '~bootstrap/scss/';
+
+// Load Custom Bootstrap variable overrides
+@import "./bootstrap-override/variables";
 
 // Load FULL Bootstrap styling
 @import "~bootstrap/scss/bootstrap";
@@ -44,4 +43,7 @@
 //@import "~bootstrap/scss/transitions";
 //@import "~bootstrap/scss/type";
 //@import "~bootstrap/scss/utilities";
-//@import "~bootstrap/scss/variables";
+
+
+// Load Custom Bootstrap component overrides
+@import "./bootstrap-override/bootstrap-override";

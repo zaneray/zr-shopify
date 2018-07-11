@@ -36,8 +36,17 @@ Thats it! To start development, run the following command from a terminal in you
 npm start
 ```
 
+Your static development assets (css, js, etc.) will be served from a local express server running at https://localhost:8080.
+
+You will need to visit [https://localhost:8080](https://localhost:8080) in order to accept the privacy certificate so that you can receive your local dev assets.
+
 [Full development reference](https://github.com/Shopify/slate/wiki/4.-Start-developing)
 
 ## ZR Shopify Theme Reference
-Notes here on bootstrap/js/build setup
+
+The ZR Shopify Theme uses Bootstrap 4 as a base css framework and for certain JS components.  Please visit the [Bootstrap 4 Docs](https://getbootstrap.com/docs/4.0/components/alerts/) for official reference.
+
+All Bootstrap JS components are organized in the **/src/assets/scripts/vendor/bootstrap/bootstrap.js** file.  They can then be imported from that file into any part of the project.  By default, the **theme.js** file imports the Bootstrap Modal, Scrollspy and Tooltip components globally.
+
+The Bootstrap styles are pulled into the **/src/assets/styles/core/bootstrap.scss** file, with only certain component/framework styles enabled by default.  You can uncomment any other Bootstrap styles you need here, if they are not already enabled.  Bootstrap override variables and mixins are setup in the **/core/bootstrap-override** directory of styles.
 

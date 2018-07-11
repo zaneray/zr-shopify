@@ -1,6 +1,6 @@
 <style>
   {% if section.settings.logo != blank %}
-    .site-header__logo-image {
+    .site-header-logo-image {
       max-width: {{ section.settings.logo_max_width }}px;
     }
   {% endif %}
@@ -9,11 +9,11 @@
 <nav role="navigation" class="navbar navbar-expand-sm navbar-light bg-light">
   <div class="container align-items-center">
     {% if template.name == 'index' %}
-      <h1 itemscope itemtype="http://schema.org/Organization" class="m-0">
+      <h1 itemscope itemtype="http://schema.org/Organization" class="m-0 navbar-brand">
     {% else %}
-      <div class="h1" itemscope itemtype="http://schema.org/Organization">
+      <div class="h1 m-0 navbar-brand" itemscope itemtype="http://schema.org/Organization">
     {% endif %}
-        <a href="/" itemprop="url" class="navbar-brand site-logo {% if section.settings.logo != blank %} site-header__logo-image{% endif %}">
+        <a href="/" itemprop="url" class="site-logo {% if section.settings.logo != blank %} site-header__logo-image{% endif %}">
           {% if section.settings.logo != blank %}
             {% capture image_size %}{{ section.settings.logo_max_width }}x{% endcapture %}
             <img src="{{ section.settings.logo | img_url: image_size }}"
@@ -79,7 +79,7 @@
                 value="{{ search.terms | escape }}"
                 placeholder="{{ 'general.search.placeholder' | t }}"
                 aria-label="Search">
-        <button type="submit" class="btn btn-outline-success">
+        <button type="submit" class="btn btn-outline-primary">
           {% include 'icon-search' %}
           <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
         </button>

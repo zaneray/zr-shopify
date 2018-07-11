@@ -10,10 +10,10 @@
   Theme Store optional settings
   - Home page only: only shows on the home page
 {%- endcomment -%}
-<header role="banner" data-section-id="{{ section.id }}" data-section-type="header" class="nav">
-  <div class="container justify-content-end d-flex flex-wrap flex-sm-nowrap align-items-center">
+<header role="banner" data-section-id="{{ section.id }}" data-section-type="header" class="nav bg-dark">
+  <div class="container justify-content-end d-sm-flex flex-sm-nowrap align-items-center">
     {%- if section.settings.announcement_bar_enabled -%}
-      <div class="nav-item navbar-text mr-auto text-center text-sm-left">
+      <div class="announcement-bar nav-item navbar-text justify-content-center justify-content-sm-start mr-sm-auto">
         {%- if section.settings.announcement_bar_home_page_only == false or template.name == 'index' -%}
           {%- if section.settings.announcement_bar_link != blank -%}
             <a href="{{ section.settings.announcement_bar_link }}">
@@ -26,39 +26,44 @@
       </div>
     {%- endif -%}
 
-    {% if shop.customer_accounts_enabled %}
-      <div class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ 'layout.customer.account' | t }}</a>
-        <ul class="dropdown-menu">
-          {% if customer %}
-            <li class="dropdown-item">
-              {% if customer.first_name != blank %}
-                {% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
-                {{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }}
-              {% else %}
-                <a href="/account">{{ 'layout.customer.account' | t }}</a>
-              {% endif %}
-            </li>
-            <li class="dropdown-item">
-              {{ 'layout.customer.log_out' | t | customer_logout_link }}
-            </li>
-          {% else %}
-            <li class="dropdown-item">
-              {{ 'layout.customer.log_in' | t | customer_login_link }}
-            </li>
-            <li class="dropdown-item">
-              {{ 'layout.customer.create_account' | t | customer_register_link }}
-            </li>
-          {% endif %}
-        </ul>
-      </div>
-    {% endif %}
+    <ul class="util-nav nav justify-content-end">
+      {% if shop.customer_accounts_enabled %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ 'layout.customer.account' | t }}</a>
+          <ul class="dropdown-menu">
+            {% if customer %}
+              <li class="dropdown-item">
+                {% if customer.first_name != blank %}
+                  {% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
+                  {{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }}
+                {% else %}
+                  <a href="/account">{{ 'layout.customer.account' | t }}</a>
+                {% endif %}
+              </li>
+              <li class="dropdown-item">
+                {{ 'layout.customer.log_out' | t | customer_logout_link }}
+              </li>
+            {% else %}
+              <li class="dropdown-item">
+                {{ 'layout.customer.log_in' | t | customer_login_link }}
+              </li>
+              <li class="dropdown-item">
+                {{ 'layout.customer.create_account' | t | customer_register_link }}
+              </li>
+            {% endif %}
+          </ul>
+        </li>
+      {% endif %}
 
-    <a href="/cart">
-      {% include 'icon-cart' %}
-      {{ 'layout.cart.title' | t }}
-      ({{ cart.item_count }} {{ 'layout.cart.items_count' | t: count: cart.item_count }})
-    </a>
+      <li class="nav-item">
+        <a class="nav-link" href="/cart">
+          {% include 'icon-cart' %}
+          {{ 'layout.cart.title' | t }}
+          ({{ cart.item_count }} {{ 'layout.cart.items_count' | t: count: cart.item_count }})
+        </a>
+      </li>
+    </ul>
+
   </div>
 </header>
 

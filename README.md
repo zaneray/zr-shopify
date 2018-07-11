@@ -44,7 +44,7 @@ You will need to visit [https://localhost:8080](https://localhost:8080) in order
 
 ## ZR Shopify Theme Reference
 
-The ZR Shopify Theme uses Bootstrap 4 as a base css framework and for certain JS components.  Please visit the [https://getbootstrap.com/docs/4.0/components/alerts/](Bootstrap 4 Docs) for official reference.
+The ZR Shopify Theme uses Bootstrap 4 as a base css framework and for certain JS components.  Please visit the [Bootstrap 4 Docs](https://getbootstrap.com/docs/4.0/components/alerts/) for official reference.
 
 All Bootstrap JS components are organized in the **/src/assets/scripts/vendor/bootstrap/bootstrap.js** file.  They can then be imported from that file into any part of the project.  By default, the **theme.js** file imports the Bootstrap Modal, Scrollspy and Tooltip components globally.
 

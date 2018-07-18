@@ -1,0 +1,6 @@
+.announcement-bar {
+  @include media-breakpoint-down(sm) {
+    @include make-row();
+    border-bottom: 1px solid $gray-500;
+  }
+}

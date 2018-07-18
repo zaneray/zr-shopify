@@ -18,12 +18,12 @@
 @import './tools/mixins';
 @import './tools/functions';
 
-// Core
-@import './core/helpers';
-@import './core/layout';
-@import './core/responsive-tables';
+// Core - Slate
+//@import './core/helpers';
+//@import './core/layout';
+//@import './core/responsive-tables';
 @import './core/rte';
-@import './core/typography';
+//@import './core/typography';
 
 // Components
 @import './components/responsive-images';
@@ -32,6 +32,7 @@
 @import './sections/blog-posts';
 @import './sections/collection-list';
 @import './sections/featured-collection';
+@import './sections/header';
 @import './sections/image-with-text';
 
 // Templates

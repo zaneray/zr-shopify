@@ -1,7 +1,5 @@
 .featured-collection {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: $grid-max-width;
+
 }
 
 .featured-collection-item {
@@ -10,10 +8,6 @@
   text-align: center;
 }
 
-.featured-collection__image {
+.featured-collection-image {
   min-width: 320px;
-}
-
-.featured-collection__title {
-  flex-basis: 100%;
 }

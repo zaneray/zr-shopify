@@ -118,6 +118,17 @@
     "general": {
       "no_matches": "Sorry, there are no products in this collection",
       "link_title": "Browse our {{ title }} collection"
+    },
+    "sorting": {
+      "title": "Sort by",
+      "featured": "Featured",
+      "best_selling": "Best Selling",
+      "az": "Alphabetically, A-Z",
+      "za": "Alphabetically, Z-A",
+      "price_ascending": "Price, low to high",
+      "price_descending": "Price, high to low",
+      "date_descending": "Date, new to old",
+      "date_ascending": "Date, old to new"
     }
   },
   "contact": {

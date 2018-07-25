@@ -7,7 +7,7 @@
 </style>
 
 <nav role="navigation" class="navbar navbar-expand-sm navbar-light bg-light">
-  <div class="container align-items-center">
+  <div class="container">
     {% if template.name == 'index' %}
       <h1 itemscope itemtype="http://schema.org/Organization" class="m-0 navbar-brand">
     {% else %}
@@ -68,7 +68,7 @@
           {% endif %}
         {% endfor %}
       </ul>
-      <form action="/search" method="get" role="search" class="form-inline my-2 my-lg-0">
+      <form action="/search" method="get" role="search" class="form-inline flex-nowrap my-2 my-lg-0">
         <label for="Search" class="sr-only">
           {{ 'general.search.placeholder' | t }}
         </label>

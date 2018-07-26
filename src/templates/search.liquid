@@ -2,7 +2,7 @@
 
   <h1>
     {% if search.performed %}
-      <span class="visually-hidden">{{ 'general.search.heading' | t: count: search.results_count }}:</span>
+      <span class="sr-only">{{ 'general.search.heading' | t: count: search.results_count }}:</span>
         {{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
     {% else %}
       {{ 'general.search.title' | t }}
@@ -28,7 +28,7 @@
     {% if search.results_count == 0 %}
       <p>{{ 'general.search.no_results_html' | t: terms: search.terms }}</p>
     {% else %}
-      <h2 class="visually-hidden">{{ 'general.search.heading' | t: count: search.results_count }}</h2>
+      <h2 class="sr-only">{{ 'general.search.heading' | t: count: search.results_count }}</h2>
       <ul>
         {% for item in search.results %}
           <li>
@@ -49,7 +49,7 @@
                     {{ 'products.product.on_sale' | t }}
                     <span>{{ item.price | money }}</span>
                   {% endif %}
-                  <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+                  <span class="sr-only">{{ 'products.product.regular_price' | t }}</span>
                   <s>{{ item.compare_at_price | money }}</s>
                 {% else %}
                   {% if item.price_varies %}

@@ -31,8 +31,8 @@ function checkUrlHash() {
  *  Show/Hide recover password form
  */
 function toggleRecoverPasswordForm() {
-  $('#RecoverPasswordForm').toggleClass('hide');
-  $('#CustomerLoginForm').toggleClass('hide');
+  $('#RecoverPasswordForm').toggleClass('d-none');
+  $('#CustomerLoginForm').toggleClass('d-none');
 }
 
 /**
@@ -47,7 +47,7 @@ function resetPasswordSuccess() {
   }
 
   // show success message
-  $('#ResetSuccess').removeClass('hide');
+  $('#ResetSuccess').removeClass('d-none');
 }
 
 if ($(selectors.recoverPasswordForm).length) {

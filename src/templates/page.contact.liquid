@@ -7,7 +7,7 @@
 {% form 'contact' %}
 
   {% if form.posted_successfully? %}
-    <p class="form-success">
+    <p class="alert alert-success">
       {{ 'contact.form.post_success' | t }}
     </p>
   {% endif %}

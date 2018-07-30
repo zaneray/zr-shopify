@@ -1,11 +1,9 @@
 .blog-post {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  // blog post overrides
 }
 
-.blog-post__item {
-  flex: 1 1 percentage(1 / 3);
+.blog-post-item {
+  @include media-breakpoint-down(sm) {
+    flex-wrap: wrap;
+  }
 }

@@ -19,7 +19,7 @@
 @import './tools/functions';
 
 // Core - Slate
-//@import './core/helpers';
+@import './core/helpers';
 //@import './core/layout';
 //@import './core/responsive-tables';
 @import './core/rte';
@@ -33,8 +33,10 @@
 @import './sections/collection-list';
 @import './sections/featured-collection';
 @import './sections/header';
+@import './sections/hero-banner';
 @import './sections/image-with-text';
 
 // Templates
 @import './templates/gift_card';
 @import './templates/product';
+@import './templates/search';

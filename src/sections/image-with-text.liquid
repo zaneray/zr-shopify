@@ -12,14 +12,14 @@
   - Button link: link of the button
 {%- endcomment -%}
 
-<section class="image-with-text">
+<section class="image-with-text" style="background-color: {{ section.settings.bg_color }}">
   {% capture image_layout %}
-    <div class="image-with-text__image">
+    <div class="image-with-text-image mb-xs-3">
       {% if section.settings.image != blank %}
         {% include 'responsive-image' with
           image: section.settings.image,
-          max_width: 545,
-          max_height: 545
+          max_width: 960,
+          max_height: 960
         %}
       {% else %}
         {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
@@ -31,15 +31,15 @@
     {{ image_layout }}
   {% endif %}
 
-  <div class="image-with-text__text">
+  <div class="image-with-text-text px-3 px-lg-5 d-flex flex-column justify-content-center align-items-start">
     {% if section.settings.title != blank %}
-      <h2>{{ section.settings.title | escape }}</h2>
+      <h2 style="color: {{ section.settings.text_color }}">{{ section.settings.title | escape }}</h2>
     {% endif %}
     {% if section.settings.text != blank %}
-      <div>{{ section.settings.text }}</div>
+      <div style="color: {{ section.settings.text_color }}">{{ section.settings.text }}</div>
     {% endif %}
     {% if section.settings.button_label != blank and section.settings.button_link != blank %}
-      <a href="{{ section.settings.button_link }}">
+      <a href="{{ section.settings.button_link }}" class="btn {{ section.settings.button_type }}">
         {{ section.settings.button_label | escape }}
       </a>
     {% endif %}
@@ -96,6 +96,52 @@
         "type": "url",
         "id": "button_link",
         "label": "Button link"
+      },
+      {
+        "type": "select",
+        "id": "button_type",
+        "label": "Button Type",
+        "default": "btn-secondary",
+        "options": [
+          {
+            "value": "btn-primary",
+            "label": "Primary"
+          },
+          {
+            "value": "btn-secondary",
+            "label": "Secondary"
+          },
+          {
+            "value": "btn-info",
+            "label": "Info"
+          },
+          {
+            "value": "btn-link",
+            "label": "Link"
+          },
+          {
+            "value": "btn-warning",
+            "label": "Warning"
+          },
+          {
+            "value": "btn-outline-light",
+            "label": "Outline Light"
+          },
+          {
+            "value": "btn-outline-dark",
+            "label": "Outline Dark"
+          }
+        ]
+      },
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Background Color"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text Color"
       }
     ],
     "presets": [

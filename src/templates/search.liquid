@@ -1,80 +1,98 @@
 {% paginate search.results by 10 %}
 
-  <h1>
-    {% if search.performed %}
-      <span class="visually-hidden">{{ 'general.search.heading' | t: count: search.results_count }}:</span>
-        {{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
-    {% else %}
-      {{ 'general.search.title' | t }}
-    {% endif %}
-  </h1>
 
-  <form action="/search" method="get" role="search">
-    <label for="Search" class="label-hidden">
-      {{ 'general.search.placeholder' | t }}
-    </label>
-    <input type="search"
-           name="q"
-           id="Search"
-           value="{{ search.terms | escape }}"
-           placeholder="{{ 'general.search.placeholder' | t }}">
-    <button type="submit" class="button">
-      {% include 'icon-search' %}
-      <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
-    </button>
-  </form>
+  <header role="banner" class="jumbotron {{collectionClass}} mb-3">
+    <div class="container">
+      <h1>
+        {% if search.performed %}
+          <span class="sr-only">{{ 'general.search.heading' | t: count: search.results_count }}:</span>
+            {{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
+        {% else %}
+          {{ 'general.search.title' | t }}
+        {% endif %}
+      </h1>
 
+      <form action="/search" method="get" role="search" class="form-inline mb-3">
+        <div class="form-group">
+          <label for="Search" class="label-hidden">
+            {{ 'general.search.placeholder' | t }}
+          </label>
+          <input type="search"
+                name="q"
+                id="Search"
+                class="form-control ml-2"
+                value="{{ search.terms | escape }}"
+                placeholder="{{ 'general.search.placeholder' | t }}">
+          <button type="submit" class="btn btn-secondary">
+            {% include 'icon-search' %}
+            <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </header>
   {% if search.performed %}
     {% if search.results_count == 0 %}
       <p>{{ 'general.search.no_results_html' | t: terms: search.terms }}</p>
     {% else %}
-      <h2 class="visually-hidden">{{ 'general.search.heading' | t: count: search.results_count }}</h2>
-      <ul>
-        {% for item in search.results %}
-          <li>
-            <a href="{{ item.url | within: collection }}">
-              {% assign featured_image = item.image | default: item.featured_image %}
-              {% if featured_image != blank %}
-                {{ featured_image | img_url: '240x240' | img_tag }}
-              {% endif %}
-              <h3>{{ item.title }}</h3>
-            </a>
-            {% if item.object_type == 'product' %}
-              <p>
-                {% if item.compare_at_price > item.price %}
-                  {% if item.price_varies %}
-                    {% assign sale_price = item.price | money %}
-                    {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
-                  {% else %}
-                    {{ 'products.product.on_sale' | t }}
-                    <span>{{ item.price | money }}</span>
-                  {% endif %}
-                  <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
-                  <s>{{ item.compare_at_price | money }}</s>
-                {% else %}
-                  {% if item.price_varies %}
-                    {% assign price = item.price | money %}
-                    <span>{{ 'products.product.from_text_html' | t: price: price }}</span>
-                  {% else %}
-                    <span>{{ item.price | money }}</span>
-                  {% endif %}
+
+      <div class="container">
+        <h2 class="sr-only">{{ 'general.search.heading' | t: count: search.results_count }}</h2>
+        <div class="card-columns card-columns-layout">        
+          {% for item in search.results %}
+            <div class="card product-card">
+              <a href="{{ item.url | within: collection }}">
+                {% assign featured_image = item.image | default: item.featured_image %}
+                {% if featured_image != blank %}
+                  {% include 'responsive-image' with
+                    image: featured_image,
+                    max_width: 640,
+                    max_height: 640,
+                    img_class: "card-img-top"
+                  %}
                 {% endif %}
-                {% unless item.available %}
-                {{ 'products.product.sold_out' | t }}
-                {% endunless %}
-              </p>
-            {% else %}
-              <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
-            {% endif %}
-
-          </li>
-        {% endfor %}
-      </ul>
-
-      {% if paginate.pages > 1 %}
-        {% include 'pagination' %}
-      {% endif %}
+              </a>
+              <div class="card-body">
+                <h3 class="card-title">
+                  <a href="{{ item.url | within: collection }}">{{ item.title }}</a>
+                </h3>
+                {% if item.object_type == 'product' %}
+                  <p>
+                    {% if item.compare_at_price > item.price %}
+                      {% if item.price_varies %}
+                        {% assign sale_price = item.price | money %}
+                        {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+                      {% else %}
+                        {{ 'products.product.on_sale' | t }}
+                        <span>{{ item.price | money }}</span>
+                      {% endif %}
+                      <span class="sr-only">{{ 'products.product.regular_price' | t }}</span>
+                      <s>{{ item.compare_at_price | money }}</s>
+                    {% else %}
+                      {% if item.price_varies %}
+                        {% assign price = item.price | money %}
+                        <span>{{ 'products.product.from_text_html' | t: price: price }}</span>
+                      {% else %}
+                        <span>{{ item.price | money }}</span>
+                      {% endif %}
+                    {% endif %}
+                    {% unless item.available %}
+                    {{ 'products.product.sold_out' | t }}
+                    {% endunless %}
+                  </p>
+                {% else %}
+                  <p class="card-text">{{ item.content | strip_html | truncatewords: 50 }}</p>
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
     {% endif %}
   {% endif %}
 
+
+{% if paginate.pages > 1 %}
+  {% include 'pagination' %}
+{% endif %}
 {% endpaginate %}

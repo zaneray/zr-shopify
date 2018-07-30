@@ -7,18 +7,44 @@
   {%- assign onboarding_title = 'homepage.onboarding.product_title' | t -%}
 {% endif %}
 
-<div data-section-id="{{ section.id }}" data-section-type="product">
-
-  {% if featured_image.src != blank %}
-    {% include 'responsive-image' with
-      image: featured_image,
-      max_width: 700,
-      max_height: 800
-    %}
-  {% endif %}
+<section data-section-id="{{ section.id }}" data-section-type="product">
 
   {% if product.images.size > 1 %}
-    <ul>
+  {% comment %} TODO figure out to connect with to the JS init dynamicall {% endcomment %}
+    <div id="featured-product-carousel" class="carousel">
+      <ol class="carousel-indicators">
+        {% for image in product.images %}
+          <li data-target="#carouselExampleIndicators" data-slide-to="{{ forloop.index0 }}" {% if forloop.first == true %}class="active"{% endif %}></li>
+        {% endfor %}
+        {% comment %} <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li> {% endcomment %}
+      </ol>
+      <div class="carousel-inner">
+      {% for image in product.images %}
+        <div class="carousel-item {% if forloop.first == true %}active{% endif %}">
+          {% comment %} <img class="d-block w-100" src="{{ image.src | img_url: '160x160' }}" alt="{{ image.alt | escape }}"> {% endcomment %}
+          {% include 'responsive-image' with
+            image: image.src,
+            max_width: 960,
+            max_height: 960,
+            img_class: "d-block w-100"
+          %}
+        </div>
+      {% endfor %}
+
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+
+
+    <ul class="nav">
       {% for image in product.images %}
         <li>
           <a href="{{ image.src | img_url: '480x480' }}" data-product-single-thumbnail>
@@ -27,6 +53,17 @@
         </li>
       {% endfor %}
     </ul>
+
+  {% else %}
+    {% comment %} Just show the featured image {% endcomment %}
+    {% if featured_image.src != blank %}
+      {% include 'responsive-image' with
+        image: featured_image,
+        max_width: 700,
+        max_height: 800
+      %}
+    {% endif %}
+  
   {% endif %}
 
   <h1>{{ product.title | default: onboarding_title }}</h1>
@@ -80,7 +117,7 @@
         </span>
 
         {% if product.compare_at_price_max > product.price %}
-          <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
+          <span class="sr-only" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
           <s data-compare-price>
             {% if current_variant.compare_at_price > current_variant.price %}
               {{ current_variant.compare_at_price | money }}
@@ -120,7 +157,7 @@
       {{ product | json }}
     </script>
   {% endunless %}
-</div>
+</section>
 
 {% schema %}
   {

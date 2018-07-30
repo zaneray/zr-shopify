@@ -74,7 +74,7 @@
 
     <div id="comments">
       {% if comment and comment.status and comment.id != blank and paginate.current_page == 1 %}
-        <p class="form-success">
+        <p class="alert alert-success">
           {% if blog.moderated? and comment.status != 'published' %}
             {{ 'blogs.comments.success_moderated' | t }}
           {% else %}

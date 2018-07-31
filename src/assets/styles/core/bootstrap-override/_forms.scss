@@ -5,3 +5,7 @@
     @include make-col-offset(3);
   }
 }
+
+.form-control-qty {
+  max-width: 4rem;
+}

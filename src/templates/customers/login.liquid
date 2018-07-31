@@ -52,7 +52,7 @@
 
     </div>
 
-    <div id="RecoverPasswordForm" class="d-none">
+    <div id="RecoverPasswordForm" class="d-none mt-3">
       <h2>{{ 'customer.recover_password.title' | t }}</h2>
       <p>{{ 'customer.recover_password.subtext' | t }}</p>
 
@@ -63,20 +63,22 @@
           <span class="d-none reset-password-success"></span>
         {% endif %}
 
-        <label for="RecoverEmail" class="label-hidden">
-          {{ 'customer.recover_password.email' | t }}
-        </label>
-        <input type="email"
-              name="email"
-              id="RecoverEmail"
-              placeholder="{{ 'customer.recover_password.email' | t }}"
-              spellcheck="false"
-              autocomplete="off"
-              autocapitalize="off">
+        <div class="form-group">
+          <label for="RecoverEmail" class="label-hidden">
+            {{ 'customer.recover_password.email' | t }}
+          </label>
+          <input type="email"
+                name="email"
+                id="RecoverEmail"
+                class="form-control"
+                placeholder="{{ 'customer.recover_password.email' | t }}"
+                spellcheck="false"
+                autocomplete="off"
+                autocapitalize="off">
+        </div>
+        <input type="submit" class="btn btn-primary" value="{{ 'customer.recover_password.submit' | t }}">
 
-        <input type="submit" class="button" value="{{ 'customer.recover_password.submit' | t }}">
-
-        <button type="btn btn-primary" id="HideRecoverPasswordLink">
+        <button type="button" id="HideRecoverPasswordLink" class="btn btn-outline-primary">
           {{ 'customer.recover_password.cancel' | t }}
         </button>
       {% endform %}

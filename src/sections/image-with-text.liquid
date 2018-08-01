@@ -12,43 +12,8 @@
   - Button link: link of the button
 {%- endcomment -%}
 
-<section class="image-with-text" style="background-color: {{ section.settings.bg_color }}">
-  {% capture image_layout %}
-    <div class="image-with-text-image mb-xs-3">
-      {% if section.settings.image != blank %}
-        {% include 'responsive-image' with
-          image: section.settings.image,
-          max_width: 960,
-          max_height: 960
-        %}
-      {% else %}
-        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-      {% endif %}
-    </div>
-  {% endcapture %}
-
-  {% if section.settings.layout == 'left' %}
-    {{ image_layout }}
-  {% endif %}
-
-  <div class="image-with-text-text px-3 px-lg-5 d-flex flex-column justify-content-center align-items-start">
-    {% if section.settings.title != blank %}
-      <h2 style="color: {{ section.settings.text_color }}">{{ section.settings.title | escape }}</h2>
-    {% endif %}
-    {% if section.settings.text != blank %}
-      <div style="color: {{ section.settings.text_color }}">{{ section.settings.text }}</div>
-    {% endif %}
-    {% if section.settings.button_label != blank and section.settings.button_link != blank %}
-      <a href="{{ section.settings.button_link }}" class="btn {{ section.settings.button_type }}">
-        {{ section.settings.button_label | escape }}
-      </a>
-    {% endif %}
-  </div>
-
-  {% if section.settings.layout == 'right' %}
-    {{ image_layout }}
-  {% endif %}
-</section>
+{% assign schema_type = section %}
+{% include 'section_image-with-text' %}
 
 {% schema %}
   {

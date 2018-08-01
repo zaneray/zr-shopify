@@ -4,8 +4,11 @@
 }
 
 .image-with-text-image {
-  flex: 0 1 50%;
-  min-width: 320px;
+  width: 100%;
+  @include media-breakpoint-up(lg) {
+    flex: 0 1 50%;
+    min-width: 320px;
+  }
 }
 
 .image-with-text-text {

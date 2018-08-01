@@ -1,0 +1,85 @@
+{% comment %} 
+| Schema Logic
+|
+| Base on if this code is going to be used as a section or block
+| Use {% assign schema_type = section %} before you include your 
+| snippet {% include 'section_hero-banner' %}
+| if additional schema settings are introduced they will need to 
+| be added in the appropriate /templates and /section files
+|
+  image
+  layout
+  title
+  text
+  button_label
+  button_link
+  button_type
+  bg_color
+  text_color
+|
+{% endcomment %}
+
+{% if schema_type == section %}
+
+  {% assign schema_image = section.settings.image %}
+  {% assign schema_layout = section.settings.layout %}
+  {% assign schema_title = section.settings.title %}
+  {% assign schema_text = section.settings.text %}
+  {% assign schema_button_label = section.settings.button_label %}
+  {% assign schema_button_link = section.settings.button_link %}
+  {% assign schema_button_type = section.settings.button_type %}
+  {% assign schema_bg_color = section.settings.bg_color %}
+  {% assign schema_text_color = section.settings.text_color %}
+
+{% else %}
+
+  {% assign schema_image = block.settings.image %}
+  {% assign schema_layout = block.settings.layout %}
+  {% assign schema_title = block.settings.title %}
+  {% assign schema_text = block.settings.text %}
+  {% assign schema_button_label = block.settings.button_label %}
+  {% assign schema_button_link = block.settings.button_link %}
+  {% assign schema_button_type = block.settings.button_type %}
+  {% assign schema_bg_color = block.settings.bg_color %}
+  {% assign schema_text_color = block.settings.text_color %}
+
+{% endif %}
+
+<section class="image-with-text" style="background-color: {{ schema_bg_color }}">
+  {% capture image_layout %}
+    <div class="image-with-text-image">
+      {% if schema_image != blank %}
+        <picture>
+          <source media="(min-width: 1920px)" srcset="{{ schema_image | img_url: '1024x'}}">
+          <source media="(min-width: 960px)" srcset="{{ schema_image | img_url: '960x'}}">
+          <source media="(min-width: 640px)" srcset="{{ schema_image | img_url: '640x'}}">
+          <img src="{{ schema_image | img_url: 'grande'}}" alt="{{ schema_title }}" class="hero-banner-img">
+        </picture>
+      {% else %}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      {% endif %}
+    </div>
+  {% endcapture %}
+
+  {% if schema_layout == 'left' %}
+    {{ image_layout }}
+  {% endif %}
+
+  <div class="image-with-text-text p-3 p-lg-5 d-flex flex-column justify-content-center align-items-start">
+    {% if schema_title != blank %}
+      <h2 style="color: {{ schema_text_color }}">{{ schema_title | escape }}</h2>
+    {% endif %}
+    {% if schema_text != blank %}
+      <div style="color: {{ section.settings.text_color }}">{{ schema_text }}</div>
+    {% endif %}
+    {% if schema_button_label != blank and schema_button_link != blank %}
+      <a href="{{ schema_button_link }}" class="btn {{ schema_button_type }}">
+        {{ schema_button_label | escape }}
+      </a>
+    {% endif %}
+  </div>
+
+  {% if schema_layout == 'right' %}
+    {{ image_layout }}
+  {% endif %}
+</section>

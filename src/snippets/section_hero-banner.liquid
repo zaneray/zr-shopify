@@ -1,0 +1,63 @@
+{% comment %} 
+| Schema Logic
+|
+| Base on if this code is going to be used as a section or block
+| Use {% assign schema_type = section %} before you include your 
+| snippet {% include 'section_hero-banner' %}
+| if additional schema settings are introduced they will need to 
+| be added in the appropriate /templates and /section files
+|
+{% endcomment %}
+
+{% if schema_type == section %}
+
+  {% assign schema_title = section.settings.title %}
+  {% assign schema_image = section.settings.image %}
+  {% assign schema_image_portrait = section.settings.image_portrait %}
+  {% assign schema_text = section.settings.text %}
+  {% assign schema_button_link = section.settings.button_link %}
+  {% assign schema_button_label = section.settings.button_label %}
+
+{% else %}
+
+  {% assign schema_title = block.settings.title %}
+  {% assign schema_image = block.settings.image %}
+  {% assign schema_image_portrait = block.settings.image_portrait %}
+  {% assign schema_text = block.settings.text %}
+  {% assign schema_button_link = block.settings.button_link %}
+  {% assign schema_button_label = section.settings.button_label %}
+
+{% endif %}
+
+<div class="hero 
+  {% if schema_title != blank or schema_text != blank or schema_button_label != blank %} 
+    hero-overlay jumbotron jumbotron-fluid
+  {% endif %}">
+  {% if schema_image == blank %}
+    <div class="placeholder-background">
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    </div>
+  {% else %}
+    <picture>
+      <source media="(min-width: 1920px)" srcset="{{ schema_image | img_url: 'master'}}">
+      <source media="(min-width: 1024px)" srcset="{{ schema_image | img_url: '1440x'}}">
+      <source media="(min-width: 768px)" srcset="{{ schema_image | img_url: '1024x'}}">
+      <img src="{{ schema_image_portrait | img_url: 'grande'}}" alt="{{ schema_title }}" class="hero-banner-img">
+    </picture>
+  {% endif %}
+  <div class="hero-inner">
+    <div class="page-width text-center">
+      {% if schema_title != blank %}
+        <h2 class="h1 display{% if schema_text_size == 'large' %} font-size-xl{% endif %}">{{ schema_title | escape }}</h2>
+      {% endif %}
+      {% if schema_text != blank %}
+        <div class="lead">{{ schema_text }}</div>
+      {% endif %}
+      {% if schema_button_label != blank and schema_button_link != blank %}
+        <a href="{{ schema_button_link }}" class="btn btn-outline-light">
+          {{ schema_button_label | escape }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</div>

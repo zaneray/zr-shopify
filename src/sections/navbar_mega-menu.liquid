@@ -1,0 +1,272 @@
+<style>
+  {% if section.settings.logo != blank %}
+    .site-header-logo-image {
+      max-width: {{ section.settings.logo_max_width }}px;
+    }
+  {% endif %}
+</style>
+
+<nav role="navigation" class="navbar navbar-expand-sm navbar-light bg-light">
+  <div class="container">
+    {% if template.name == 'index' %}
+      <h1 itemscope itemtype="http://schema.org/Organization" class="m-0 navbar-brand">
+    {% else %}
+      <div class="h1 m-0 navbar-brand" itemscope itemtype="http://schema.org/Organization">
+    {% endif %}
+        <a href="/" itemprop="url" class="site-logo {% if section.settings.logo != blank %} site-header__logo-image{% endif %}">
+          {% if section.settings.logo != blank %}
+            {% capture image_size %}{{ section.settings.logo_max_width }}x{% endcapture %}
+            <img src="{{ section.settings.logo | img_url: image_size }}"
+                  srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
+                  alt="{{ section.settings.logo.alt | default: shop.name }}"
+                  itemprop="logo">
+          {% else %}
+            {{ shop.name }}
+          {% endif %}
+        </a>
+    {% if template.name == 'index' %}
+      </h1>
+    {% else %}
+      </div>
+    {% endif %} 
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto justify-content-center">
+        {% for block in section.blocks %}
+          {% case block.type %}
+
+            {% when 'megamenu' %}
+            {% include 'dropdown_mega-menu' %}
+
+            {% when 'menusimple' %}
+            {% include 'dropdown_simple' %}
+
+            {% when 'linkonly' %}
+            <li class="nav-item">
+              <a href="{{ block.settings.link }}" class="nav-link"  role="button">{{ block.settings.label }}</a>
+            </li>
+            
+          {% endcase %}
+        {% endfor %}
+      </ul>
+      <form action="/search" method="get" role="search" class="form-inline flex-nowrap my-2 my-lg-0">
+        <label for="Search" class="sr-only">
+          {{ 'general.search.placeholder' | t }}
+        </label>
+        <input type="search"
+                name="q"
+                id="Search"
+                class="form-control"
+                value="{{ search.terms | escape }}"
+                placeholder="{{ 'general.search.placeholder' | t }}"
+                aria-label="Search">
+        <button type="submit" class="btn btn-outline-primary">
+          {% include 'icon-search' %}
+          <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
+        </button>
+      </form>
+    </div>
+  </div>    
+</nav>
+
+{% schema %}
+  {
+    "name": "Navbar",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo image"
+      },
+      {
+        "type": "range",
+        "id": "logo_max_width",
+        "min": 50,
+        "max": 450,
+        "step": 10,
+        "unit": "px",
+        "label": "Custom logo width",
+        "default": 250
+      }
+    ],
+    "blocks": [
+      {
+        "type": "megamenu",
+        "name": "Mega Menu w Callouts",
+        "settings": [
+          {
+            "type":      "header",
+            "content":   "Top Navigation Link"
+          },
+          {
+            "type": "text",
+            "id": "label",
+            "label": "Top Nav Label",
+            "default": "Top Nav Item"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Top Nav Link"
+          },
+          {
+            "type":      "header",
+            "content":   "First Column"
+          },
+          {
+            "type": "text",
+            "id": "heading_1",
+            "label": "Column 1 Heading",
+            "default": "Column 1"
+          },
+          {
+            "type": "link_list",
+            "id": "link_list_1",
+            "label": "Column 1 Menu",
+            "default": "main-menu"
+          },
+          {
+            "type":      "header",
+            "content":   "Second Column"
+          },
+          {
+            "type": "text",
+            "id": "heading_2",
+            "label": "Column 2 Heading",
+            "default": "Column 2"
+          },
+          {
+            "type": "link_list",
+            "id": "link_list_2",
+            "label": "Column 2 Menu",
+            "default": "main-menu"
+          },
+          {
+            "type":      "header",
+            "content":   "Third Column"
+          },
+          {
+            "type": "text",
+            "id": "heading_3",
+            "label": "Column 3 Heading",
+            "default": "Column 3"
+          },
+          {
+            "type": "link_list",
+            "id": "link_list_3",
+            "label": "Column 3 Menu",
+            "default": "main-menu"
+          },
+          {
+            "type":      "header",
+            "content":   "Fourth Column",
+            "info":      "This column image w/text touts"
+          },
+          {
+            "type": "text",
+            "id": "tout_title",
+            "label": "Tout One Title",
+            "default": "Tout One Title"
+          },
+          {
+            "type": "textarea",
+            "id": "tout_copy",
+            "label": "Tout One Copy",
+            "default": "Tout One Copy"
+          },
+          {
+            "type": "image_picker",
+            "id": "tout_img",
+            "label": "Tout One Bg Image"
+          },
+          {
+            "type":   "range",
+            "id":     "tout_size",
+            "min":       10,
+            "max":       100,
+            "step":      1,
+            "unit":      "%",
+            "label":     "Tout Height",
+            "info":      "This is a percentage of width or (aspect ratio)",
+            "default":   50
+          }
+        ]
+      },
+      {
+        "type": "menusimple",
+        "name": "Menu Link List",
+        "settings": [
+          {
+            "type":      "header",
+            "content":   "Primary Menu Supports Three Levels Deep"
+          },
+          {
+            "type": "text",
+            "id": "label",
+            "label": "Top Nav Label",
+            "default": "Top Nav Item"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Top Nav Link"
+          },
+          {
+            "type": "link_list",
+            "id": "dropdown_link_list",
+            "label": "Main Link List",
+            "default": "main-menu"
+          }
+        ]
+      },
+      {
+        "type": "linkonly",
+        "name": "Link",
+        "settings": [
+          {
+            "type":      "header",
+            "content":   "Top level link only"
+          },
+          {
+            "type": "text",
+            "id": "label",
+            "label": "Top Nav Label",
+            "default": "Top Nav Item"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Top Nav Link"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "{{ shop.name }}",
+  {% if section.settings.logo %}
+    {% assign image_size = section.settings.logo.width | append:'x' %}
+    "logo": "https:{{ section.settings.logo | img_url: image_size }}",
+  {% endif %}
+  "sameAs": [
+    "{{ settings.social_twitter_link }}",
+    "{{ settings.social_facebook_link }}",
+    "{{ settings.social_pinterest_link }}",
+    "{{ settings.social_instagram_link }}",
+    "{{ settings.social_tumblr_link }}",
+    "{{ settings.social_snapchat_link }}",
+    "{{ settings.social_youtube_link }}",
+    "{{ settings.social_vimeo_link }}"
+  ],
+  "url": "{{ shop.url }}{{ page.url }}"
+}
+</script>

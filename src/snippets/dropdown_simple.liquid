@@ -1,0 +1,23 @@
+<li class="nav-item dropdown">
+  <a href="{{ block.settings.link }}" class="nav-link dropdown-toggle" id="navbar-dropdown-{{forloop.index}}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ block.settings.label }}</a>
+  <ul class="dropdown-menu" aria-labelledby="navbar-dropdown-{{forloop.index}}">
+    {% for link in linklists[block.settings.dropdown_link_list].links %}
+      {% if link.links != blank %}
+        <li class="dropdown-item">
+          <a href="{{ link.url }}">{{ link.title | escape }}</a>
+          <ul>
+            {% for childlink in childlink.links %}
+              <li>
+                <a href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </li>
+      {% else %}
+        <li class="nav-item">
+          <a href="{{ link.url }}" class="nav-link active">{{ link.title | escape }}</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</li>

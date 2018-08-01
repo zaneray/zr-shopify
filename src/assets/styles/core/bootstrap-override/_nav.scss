@@ -9,3 +9,11 @@
     fill: currentColor;
   }
 }
+
+// full width drop down menu
+.dropdown.dropdown-fluid {
+  position: initial;
+  .dropdown-menu {
+    width: 100%;
+  }
+}

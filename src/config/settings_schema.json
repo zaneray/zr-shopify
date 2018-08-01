@@ -49,6 +49,22 @@
     ]
   },
   {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Specify how you want the header to display"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_mega_menu",
+        "label": "Use Mega Menu",
+        "default": false,
+        "info": "Choose to use the mega menu for dropdowns versus just a simple link list drop down menu"
+      }
+    ]
+  },
+  {
     "name": "Social media",
     "settings": [
       {

@@ -39,8 +39,8 @@
         {% for link in linklists[section.settings.main_linklist].links %}
           {% if link.links != blank %}
             <li class="nav-item dropdown active">
-              <a href="{{ link.url }}" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ link.title | escape }}</a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a href="{{ link.url }}" class="nav-link dropdown-toggle" id="navbar-dropdown-{{forloop.index}}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ link.title | escape }}</a>
+              <ul class="dropdown-menu" aria-labelledby="navbar-dropdown-{{forloop.index}}">
                 {% for childlink in link.links %}
                   {% if childlink.links != blank %}
                     <li class="dropdown-item">

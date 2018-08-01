@@ -58,8 +58,13 @@
   <a class="js-in-page-link sr-only sr-only-focusable" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
 
   {% section 'header' %}
-  {% section 'navbar' %}
-
+  {% if settings.use_mega_menu %}
+    {% section 'navbar_mega-menu' %}
+  {% else %}
+    {% comment %} simple link list controled by single menu {% endcomment %}
+    {% section 'navbar' %}
+  {% endif %}
+    
   <main role="main" id="MainContent">
     {{ content_for_layout }}
   </main>
